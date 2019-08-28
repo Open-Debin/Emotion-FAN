@@ -4,4 +4,4 @@
 ## Download pretrain models
 We share two model of resnet18, include a model pretrained in MS-Celeb-1M and another in FER+(acc:88.65%)
 
-[Baidu](http://gitcafe.com) or [dropbox](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/edit/master/README.md)
+[Baidu](http://gitcafe.com) or [Dropbox](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/README.md)
