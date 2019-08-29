@@ -12,11 +12,11 @@ We share two model of **ResNet18**, include a model pretrained in **MS-Celeb-1M*
 ## Demo AFEW
 Training with self-attention
 ```
-CUDA_VISIBLE_DEVICES=2 anapy3 Demo_AFEW_Attention.py --at_type 0
+CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 0
 ```
 Training with relation-attention
 ```
-CUDA_VISIBLE_DEVICES=2 anapy3 Demo_AFEW_Attention.py --at_type 1
+CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 ```
 
 
