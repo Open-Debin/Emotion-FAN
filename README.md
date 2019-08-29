@@ -18,8 +18,14 @@ Training with relation-attention
 ```
 CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 ```
-### Options
-* 这是项目
+#### Options
+* ``` --lr ```: initial learning rate
+* ``` --at_type ```: 0 is self-attention; 1 is relation-attention
+* ``` --epochs ```: number of total epochs to run
+* ``` --momentum ```: momentum
+* ``` --weight-decay ```: weight decay (default: 1e-4)
+* ``` -e ```: evaluate model on validation set
+* etc.
 
 
 ## Citation
