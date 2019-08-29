@@ -18,6 +18,8 @@ Training with relation-attention
 ```
 CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 ```
+### Options
+* 这是项目
 
 
 ## Citation
