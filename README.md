@@ -28,8 +28,8 @@ CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 * etc.
 
 ## Visualization
-![1](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization1.png?imageMogr2/thumbnail/!<Scale>500)
-![2](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization2.png?imageMogr2/thumbnail/!<Scale>500)
+![1](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization1.png?imageMogr2/thumbnail/!<Scale>100)
+![2](https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization2.png?imageMogr2/thumbnail/!<Scale>100)
 ## Citation
 If you find this code useful in your research, please consider citing us:
 ```
