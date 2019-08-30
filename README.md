@@ -7,6 +7,9 @@
 ## Visualization
 <img width="352" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization1.png"/><img width="470" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization2.png"/>
 
+In the picture abow, the blue bars represent the self-attention weights and orange bars the final weights(the weights combine self-attention and relation-attention). In total, both kinds of weights can reflect
+the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure
+face frames. This explicitly explains why adding relation-attention boost performance.
  
 ## Download pretrain models
 We share two model of **ResNet18**, include a model pretrained in **MS-Celeb-1M** and another in **FER+**.
