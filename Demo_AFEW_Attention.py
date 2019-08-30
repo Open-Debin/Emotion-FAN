@@ -77,10 +77,7 @@ def main():
         is_best = prec1 > best_prec1
         if is_best:
             print('better model!')
-
-        best_prec1 = max(prec1, best_prec1)
-
-        if is_best:
+            best_prec1 = max(prec1, best_prec1)
             util.save_checkpoint({
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
