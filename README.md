@@ -3,6 +3,11 @@
  
  [Debin Meng](michaeldbmeng19@outlook.com), [Xiaojiang Peng](https://pengxj.github.io/), etc.
  
+
+## Visualization
+<img width="352" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization1.png"/><img width="470" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization2.png"/>
+
+ 
 ## Download pretrain models
 We share two model of **ResNet18**, include a model pretrained in **MS-Celeb-1M** and another in **FER+**.
 
@@ -27,8 +32,7 @@ CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 * ``` -e ```: evaluate model on validation set
 * etc.
 
-## Visualization
-<img width="352" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization1.png"/><img width="470" height="220" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization2.png"/>
+
 ## Citation
 If you find this code useful in your research, please consider citing us:
 ```
