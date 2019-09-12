@@ -1,7 +1,7 @@
 # Emotion-FAN.pytorch
  ICIP 2019: Frame Attention Networks for Facial Expression Recognition in Videos  [pdf](https://arxiv.org/pdf/1907.00193.pdf)
  
- [Debin Meng](michaeldbmeng19@outlook.com), [Xiaojiang Peng](https://pengxj.github.io/), etc.
+ [Debin Meng](michaeldbmeng19@outlook.com), [Xiaojiang Peng](https://pengxj.github.io/), [YuQiao](http://mmlab.siat.ac.cn/yuqiao/), etc.
  
 
 ## Visualization
