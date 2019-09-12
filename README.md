@@ -11,9 +11,7 @@ We visualize the weights of attention module in the picture. The blue bars repre
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
  
 ## Download pretrain models
-We share two model of **ResNet18**, include a model pretrained in **MS-Celeb-1M** and another in **FER+**.
-
-[Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX)
+We share two model of **ResNet18**, include a model pretrained in **MS-Celeb-1M** and another in **FER+**.[Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX)
 
 
 ## Demo AFEW
