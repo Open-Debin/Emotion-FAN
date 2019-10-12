@@ -4,13 +4,13 @@
  [Debin Meng](michaeldbmeng19@outlook.com), [Xiaojiang Peng](https://pengxj.github.io/), [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/), etc.
 
 ## Requirement
-Pillow==6.2.0
+Pillow == 6.2.0
 
-numpy==1.17.2
+numpy == 1.17.2
 
-torch==1.3.0
+torch == 1.3.0
 
-torchvision==0.4.1
+torchvision == 0.4.1
 
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
