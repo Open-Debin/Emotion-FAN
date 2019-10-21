@@ -49,6 +49,6 @@ Author = {Debin Meng and Xiaojiang Peng and Kai Wang and Yu Qiao},
 Title = {frame attention networks for facial expression recognition in videos},
 Year = {2019},
 Eprint = {arXiv:1907.00193},
-url={https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN}
+url={https://github.com/Open-Debin/Emotion-FAN}
 }
 ```
