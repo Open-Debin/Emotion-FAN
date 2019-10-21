@@ -118,7 +118,7 @@ class VideoDataset(data.Dataset):
     def __len__(self):
         return len(self.imgs_first)
 
-# there many be something wrong
+# 
 class TripleImageDataset(data.Dataset):
     def __init__(self, video_root, video_list, rectify_label=None, transform=None):
 
