@@ -44,11 +44,13 @@ CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
 ## Citation
 If you find this code useful in your research, please consider citing us:
 ```
-@misc{1907.00193,
-Author = {Debin Meng and Xiaojiang Peng and Kai Wang and Yu Qiao},
-Title = {frame attention networks for facial expression recognition in videos},
-Year = {2019},
-Eprint = {arXiv:1907.00193},
-url={https://github.com/Open-Debin/Emotion-FAN}
+@inproceedings{meng2019frame,
+  title={frame attention networks for facial expression recognition in videos},
+  author={Meng, Debin and Peng, Xiaojiang and Wang, Kai and Qiao, Yu},
+  booktitle={2019 IEEE International Conference on Image Processing (ICIP)},
+  pages={3866--3870},
+  year={2019},
+  organization={IEEE},
+  url={https://github.com/Open-Debin/Emotion-FAN}
 }
 ```
