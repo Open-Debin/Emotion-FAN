@@ -180,7 +180,7 @@ class ResNet_AT(nn.Module):
 
             if self.at_type == 'self-attention':
                 vm1 = vs_stack.mul(alphas_stack).sum(2).div(alphas_stack.sum(2))
-            if self.at_type == 'relation-attention':
+            if self.at_type == 'self_relation-attention':
                 vm1 = vs_stack.mul(alphas_stack).sum(2).div(alphas_stack.sum(2))
                 betas = []
                 for i in range(len(vs)):
@@ -195,7 +195,7 @@ class ResNet_AT(nn.Module):
                 vm1 = self.dropout(vm1)
                 pred_score = self.pred_fc1(vm1)
 
-            if self.at_type == 'relation-attention':
+            if self.at_type == 'self_relation-attention':
                 output = self.dropout2(output)
                 pred_score = self.pred_fc2(output)
 
@@ -221,7 +221,7 @@ class ResNet_AT(nn.Module):
                 return f, alphas
 
             if AT_level == 'second_level':
-                assert self.at_type == 'relation-attention'
+                assert self.at_type == 'self_relation-attention'
                 vms = index_matrix.permute(1, 0).mm(vm)  # [381, 21783] -> [21783,381] * [381,512] --> [21783, 512]
                 vs_cate = torch.cat([vectors, vms], dim=1)
 
