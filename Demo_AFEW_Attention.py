@@ -13,7 +13,7 @@ from Code import load_materials, util, Model
 #os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 parser = argparse.ArgumentParser(description='PyTorch CelebA Training')
 parser.add_argument('--at_type', '--attention', default=1, type=int, metavar='N',
-                    help= '0 is self-attention; 1 is relation-attention')
+                    help= '0 is self-attention; 1 is self + relation-attention')
 parser.add_argument('--epochs', default=180, type=int, metavar='N',
                     help='number of total epochs to run')
 parser.add_argument('--lr', '--learning-rate', default=4e-6, type=float,
@@ -31,7 +31,7 @@ best_prec1 = 0
 
 args = parser.parse_args()
 '''MyNote '''
-at_type = ['self-attention', 'relation-attention'][args.at_type]
+at_type = ['self-attention', 'self_relation-attention'][args.at_type]
 print('The attention is ' + at_type)
 
 def main():
@@ -211,7 +211,7 @@ def validate(val_loader, model):
 
         if at_type == 'self-attention':
             pred_score = model(vm=weightmean_sourcefc, phrase='eval', AT_level='pred')
-        if at_type == 'relation-attention':
+        if at_type == 'self_relation-attention':
             pred_score  = model(vectors=output_store_fc, vm=weightmean_sourcefc, alphas_from1=output_alpha, index_matrix=index_matrix, phrase='eval', AT_level='second_level')
 
         prec_video = util.accuracy(pred_score.cpu(), target_vector.cpu(), topk=(1,))
