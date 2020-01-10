@@ -10,7 +10,7 @@ We visualize the weights of attention module in the picture. The blue bars repre
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
 ## Citation
-If you find this code useful in your research, please consider citing us:
+Whether or not it is useful to you, could you please do not hesitate to citing the paper. thanks, thanks, thanks.:
 ```
 @inproceedings{meng2019frame,
   title={frame attention networks for facial expression recognition in videos},
