@@ -34,7 +34,7 @@ torch == 1.3.0
 torchvision == 0.4.1
 
 ## Download pretrain models
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. Notice!, the models trained on the AFEW dataset or CK+ dataset are not published.[Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX)
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) Notice! The model trained on the AFEW dataset or CK+ dataset are not published.
 
 
 ## Demo AFEW
