@@ -2,17 +2,9 @@
  ICIP 2019: Frame Attention Networks for Facial Expression Recognition in Videos  [pdf](https://arxiv.org/pdf/1907.00193.pdf)
  
  [Debin Meng](michaeldbmeng19@outlook.com), [Xiaojiang Peng](https://pengxj.github.io/), [Yu Qiao](http://mmlab.siat.ac.cn/yuqiao/), etc.
- 
- If you are using pieces of the posted code, please cite the above paper.
-
-## Visualization
-We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
-<img width="450" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_2.jpg"/>
-
-Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
 ## Citation
-Whether or not it is useful to you, could you please do not hesitate to citing the paper. thanks, thanks, thanks.:
+If you are using pieces of the posted code, please cite the above paper. thanks.:
 ```
 @inproceedings{meng2019frame,
   title={frame attention networks for facial expression recognition in videos},
@@ -24,6 +16,13 @@ Whether or not it is useful to you, could you please do not hesitate to citing t
   url={https://github.com/Open-Debin/Emotion-FAN}
 }
 ```
+
+## Visualization
+We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
+<img width="450" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_2.jpg"/>
+
+Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
+
 ## Requirement
 Pillow == 6.2.0
 
