@@ -1,1 +1,0 @@
-Data list of AFEW
