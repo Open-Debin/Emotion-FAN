@@ -21,7 +21,7 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
 
-<img width="450" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_2.jpg"/>
+<img width="450" height="245" src="https://github.com/Open-Debin/Emotion-FAN/blob/version1.0_august_2019/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/Open-Debin/Emotion-FAN/blob/version1.0_august_2019/visualization_2.jpg"/>
 
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
