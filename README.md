@@ -35,23 +35,24 @@ Both weights can reflect the importance of frames. Comparing the blue and orange
 # create the environment for the project
 conda create -n emotion_fan python=3.9
 conda activate emotion_fan
+
 # install ffmpeg
 sudo apt-get update 
 sudo apt-get install ffmpeg
+
 # install dlib
 sudo apt-get update
 sudo apt-get install cmake
 sudo apt-get install libboost-python-dev
 pip3 install dlib
+
 # install cv2
 pip install opencv-python
 ```
 install [pytorch](https://pytorch.org/get-started/locally/)
 
 #### Download pretrain models
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) 
-
-Notice!!! The model trained on the AFEW dataset or CK+ dataset are not published.
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/.
 
 
 ## Demo AFEW
