@@ -19,9 +19,9 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
 ## User instructions
 step1: [Install Dependencies](#dependencies)
 
-step2: [Download Pretrain Model and Dataset](#Download_Pretrain_ModelDataSet)
+step2: [Download Pretrain Model and Dataset](#download-pretrain-models)
 
-step3: [Face Alignment](#Face Alignment)
+step3: [Face Alignment](#face-alignment)
 
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
@@ -30,7 +30,7 @@ We visualize the weights of attention module in the picture. The blue bars repre
 
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
-### Dependencies
+### dependencies
 ```
 # create the environment for the project
 conda create -n emotion_fan python=3.9
@@ -51,9 +51,12 @@ pip install opencv-python
 ```
 install [pytorch](https://pytorch.org/get-started/locally/)
 
-#### Download pretrain models
+### download pretrain models
 We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/.
 
+### download published dataset
+
+### face alignment
 
 ## Demo AFEW
 Training with self-attention
