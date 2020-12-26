@@ -17,11 +17,13 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
 }
 ```
 ## User instructions
-step1: [Install Dependencies](##Dependencies)
+step1: [Install Dependencies](###Dependencies)
 
 step2: [Download Pretrain Model and Dataset](#Download_Pretrain_ModelDataSet)
 
 step3: [Face Alignment](#Face Alignment)
+
+### Dependencies
 
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
