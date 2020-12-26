@@ -67,9 +67,19 @@ python frame2face_ck_plus.py
 ```
 
 ### running experiments
-
-##### frame attention network(fan) afew
+#### CK+ Dataset
 ```
+# Baseline
+CUDA_VISIBLE_DEVICES=0 python baseline_afew.py
+# Training with self-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 0
+# Training with relation-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 1
+```
+#### AFEW Dataset
+```
+# Baseline
+CUDA_VISIBLE_DEVICES=0 python baseline_afew.py
 # Training with self-attention
 CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 0
 # Training with relation-attention
