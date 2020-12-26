@@ -23,6 +23,8 @@ step2: [Download Pretrain Model and Dataset](#download-pretrain-models)
 
 step3: [Face Alignment](#face-alignment)
 
+step4: [Running Experiments](#running-experiments)
+
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
 
@@ -58,14 +60,14 @@ We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and an
 
 ### face alignment
 
-## Demo AFEW
-Training with self-attention
+### running experiments
+
+##### frame attention network(fan) afew
 ```
-CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 0
-```
-Training with self-attention and relation-attention
-```
-CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
+# Training with self-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 0
+# Training with relation-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 1
 ```
 #### Options
 * ``` --lr ```: initial learning rate
