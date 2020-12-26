@@ -55,10 +55,7 @@ def frame2face(func_path, predictor_path, image_root_folder, save_root_folder, c
     subprocess.getstatusoutput(linux_command)
     
 if __name__ == '__main__':
-    frame_dir_train_afew = '../frame/train_afew'
-    face_dir_train_afew  = '../face/train_afew'
-    frame_dir_val_afew = '../frame/val_afew' 
-    face_dir_val_afew  = '../face/val_afew'
-    main(frame_dir_train_afew, face_dir_train_afew, n_thread=20)
-    main(frame_dir_val_afew, face_dir_val_afew, n_thread=20)
+    frame_dir_ckplus = '../frame/cohn-kanade-images'
+    face_dir_ckplus  = '../face/ck_face'
+    main(frame_dir_ckplus, face_dir_ckplus, n_thread=20)
 
