@@ -31,6 +31,7 @@ def makefile(file_dir):
 def run_threads(threads, n_thread):
     used_thread = []
     for num, new_thread in enumerate(threads):
+        print('thread index: {:}'.format(num), end=' \t')
         new_thread.start()
         used_thread.append(new_thread)
         
@@ -50,17 +51,17 @@ class threadFun(threading.Thread):
 def frame2face(func_path, predictor_path, image_root_folder, save_root_folder, cnn_face_detector):
 
     linux_command = 'python {:} {:} {:} {:} {:}'.format(func_path, predictor_path, image_root_folder, save_root_folder, cnn_face_detector)
+    print('{:}'.format(image_root_folder))
     subprocess.getstatusoutput(linux_command)
-    print('thread {:}'.format(image_root_folder))
     
 if __name__ == '__main__':
     
-    frame_dir_train = '../frame/train'
-    face_dir_train  = '../face/train'
+    frame_dir_train_afew = '../frame/train_afew'
+    face_dir_train_afew  = '../face/train_afew'
     
-    frame_dir_val = '../frame/val' 
-    face_dir_val  = '../face/val'
+    frame_dir_val_afew = '../frame/val_afew' 
+    face_dir_val_afew  = '../face/val_afew'
     
-    main(frame_dir_train, face_dir_train, n_thread=20)
-    main(frame_dir_val, face_dir_val, n_thread=20)
+    main(frame_dir_train_afew, face_dir_train_afew, n_thread=20)
+    main(frame_dir_val_afew, face_dir_val_afew, n_thread=20)
 

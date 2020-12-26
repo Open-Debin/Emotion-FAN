@@ -3,7 +3,7 @@ import torch
 print(torch.__version__)
 import torch.utils.data
 import torchvision.transforms as transforms
-from code import DebinMeng_train
+from code import data_generator
 
 cate2label = {'CK+':{0: 'Happy', 1: 'Angry', 2: 'Disgust', 3: 'Fear', 4: 'Sad', 5: 'Contempt', 6: 'Surprise',
                      'Angry': 1,'Disgust': 2,'Fear': 3,'Happy': 0,'Contempt': 5,'Sad': 4,'Surprise': 6},
@@ -14,14 +14,14 @@ cate2label = cate2label['AFEW']
 
 def afew_frames(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval):
 
-    train_dataset = DebinMeng_train.TripleImageDataset(
+    train_dataset = data_generator.TripleImageDataset(
         video_root=root_train,
         video_list=list_train,
         rectify_label=cate2label,
         transform=transforms.Compose([transforms.ToTensor()]),
     )
 
-    val_dataset = DebinMeng_train.VideoDataset(
+    val_dataset = data_generator.VideoDataset(
         video_root=root_eval,
         video_list=list_eval,
         rectify_label=cate2label,

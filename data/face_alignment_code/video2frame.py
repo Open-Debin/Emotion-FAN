@@ -40,8 +40,8 @@ def run_threads(threads, n_thread):
             used_thread = []    
 def video2frame(video_input, frame_output):
     linux_commod = 'ffmpeg -i {:} -f image2 {:}/%07d.jpg'.format(video_input, frame_output)
-    subprocess.getstatusoutput(linux_commod)
     print('{:}'.format(video_input))
+    subprocess.getstatusoutput(linux_commod)
     
 class threadFun(threading.Thread):
     def __init__(self, func, args):
@@ -52,11 +52,11 @@ class threadFun(threading.Thread):
         self.fun(*self.args)
 
 if __name__ == '__main__':
-    video_dir_train ='../video/train/'
-    frame_dir_train = '../frame/train/'
+    video_dir_train ='../video/train_afew/'
+    frame_dir_train = '../frame/train_afew/'
     
-    video_dir_val ='../video/val/'
-    frame_dir_val = '../frame/val/'
+    video_dir_val ='../video/val_afew/'
+    frame_dir_val = '../frame/val_afew/'
     
     main(video_dir_train, frame_dir_train, n_thread =20)
     main(video_dir_val, frame_dir_val, n_thread = 20)

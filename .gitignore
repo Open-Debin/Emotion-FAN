@@ -3,3 +3,5 @@
 *.jpg
 *.jpeg
 *.ipynb_checkpoints
+*.idea
+!.gitignore
