@@ -16,7 +16,14 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
   url={https://github.com/Open-Debin/Emotion-FAN}
 }
 ```
+## User instructions
+step1: [Install Dependencies](#dependencies)
 
+step2: [Download Pretrain Model and Dataset](#download-pretrain-models)
+
+step3: [Face Alignment](#face-alignment)
+
+step4: [Running Experiments](#running-experiments)
 
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
@@ -25,36 +32,64 @@ We visualize the weights of attention module in the picture. The blue bars repre
 
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
-## Requirement
-Pillow == 6.2.0
-
-numpy == 1.17.2
-
-torch == 1.3.0
-
-torchvision == 0.4.1
-
-## Download pretrain models
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) 
-
-Notice!!! The model trained on the AFEW dataset or CK+ dataset are not published.
-
-
-## Demo AFEW
-Training with self-attention
+### dependencies
 ```
-CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 0
+# create the environment for the project
+conda create -n emotion_fan python=3.9
+conda activate emotion_fan
+
+# install ffmpeg
+sudo apt-get update 
+sudo apt-get install ffmpeg
+
+# install dlib
+sudo apt-get update
+sudo apt-get install cmake
+sudo apt-get install libboost-python-dev
+pip3 install dlib
+
+# install cv2
+pip install opencv-python
 ```
-Training with self-attention and relation-attention
+install [pytorch](https://pytorch.org/get-started/locally/)
+
+### download pretrain models and published dataset
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/. 
+
+You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+ dataset](http://www.jeffcohn.net/Resources/). Please unzip the train (val) part of AFEW dataset at the file {project_dir}/data/video/train_afew (val_afew), put the file extended-cohn-kanade-images at the file: {project_dir}/data/frame .
+
+### face alignment
 ```
-CUDA_VISIBLE_DEVICES=2 python Demo_AFEW_Attention.py --at_type 1
+cd ./data/face_alignment_code/
+python video2frame_afew.py
+python frame2face_afew.py
+python frame2face_ck_plus.py
+```
+
+### running experiments
+#### CK+ Dataset
+```
+# Baseline
+CUDA_VISIBLE_DEVICES=0 python baseline_ck_plus.py -f 10
+## Training with self-attention
+CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 0
+## Training with relation-attention
+CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 1
+```
+#### AFEW Dataset
+```
+# Baseline
+CUDA_VISIBLE_DEVICES=0 python baseline_afew.py
+# Training with self-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 0
+# Training with relation-attention
+CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 1
 ```
 #### Options
 * ``` --lr ```: initial learning rate
 * ``` --at_type ```: 0 is self-attention; 1 is relation-attention
 * ``` --epochs ```: number of total epochs to run
-* ``` --momentum ```: momentum
-* ``` --weight-decay ```: weight decay (default: 1e-4)
+* ``` --fold ```: (only use for ck+) which fold used for test in ck+
 * ``` -e ```: evaluate model on validation set
 * etc.
 
