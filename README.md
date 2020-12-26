@@ -59,6 +59,12 @@ We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and an
 You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+ dataset](http://www.jeffcohn.net/Resources/). Please unzip the train (val) part of AFEW dataset at the file {project_dir}/data/video/train_afew (val_afew), put the file extended-cohn-kanade-images at the file: {project_dir}/data/frame .
 
 ### face alignment
+```
+cd ./data/face_alignment_code/
+python video2frame_afew.py
+python frame2face_afew.py
+python frame2face_ck_plus.py
+```
 
 ### running experiments
 
