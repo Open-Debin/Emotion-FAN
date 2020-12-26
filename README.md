@@ -54,7 +54,9 @@ pip install opencv-python
 install [pytorch](https://pytorch.org/get-started/locally/)
 
 ### download pretrain models and published dataset
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/. put the AFEW train[ck+](http://www.jeffcohn.net/Resources/)
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/. 
+
+You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+](http://www.jeffcohn.net/Resources/).
 
 ### face alignment
 
@@ -71,8 +73,7 @@ CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 1
 * ``` --lr ```: initial learning rate
 * ``` --at_type ```: 0 is self-attention; 1 is relation-attention
 * ``` --epochs ```: number of total epochs to run
-* ``` --momentum ```: momentum
-* ``` --weight-decay ```: weight decay (default: 1e-4)
+* ``` --fold ```: (only use for ck+) which fold used for test in ck+
 * ``` -e ```: evaluate model on validation set
 * etc.
 
