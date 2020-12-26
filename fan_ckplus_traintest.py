@@ -10,9 +10,10 @@ def main():
     parser = argparse.ArgumentParser(description='PyTorch Frame Attention Network Training')
     parser.add_argument('--at_type', '--attention', default=1, type=int, metavar='N',
                         help= '0 is self-attention; 1 is self + relation-attention')
-    parser.add_argument('--epochs', default=180, type=int, metavar='N',
+    parser.add_argument('--epochs', default=60, type=int, metavar='N',
                         help='number of total epochs to run')
-    parser.add_argument('--lr', '--learning-rate', default=4e-3, type=float,
+    parser.add_argument('-f', '--fold', default=10, type=int, help='which fold used for ck+ test')
+    parser.add_argument('--lr', '--learning-rate', default=1e-2, type=float,
                         metavar='LR', help='initial learning rate')
     parser.add_argument('-e', '--evaluate', default=False, dest='evaluate', action='store_true',
                         help='evaluate model on validation set')
@@ -20,22 +21,19 @@ def main():
     best_acc = 0
     at_type = ['self-attention', 'self_relation-attention'][args.at_type]
     print('The attention method is {:}, learning rate: {:}'.format(at_type, args.lr))
-    
     ''' Load data '''
-    root_train = './data/face/train_afew'
-    list_train = './data/txt/afew_train.txt'
+    video_root = './data/face/ck_face'
+    video_list = './data/txt/CK+_10-fold_sample_IDascendorder_step10.txt'
     batchsize_train= 48
-    root_eval = './data/face/val_afew'
-    list_eval = './data/txt/afew_eval.txt'
     batchsize_eval= 64
-    train_loader, val_loader = load.afew_faces_fan(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval)
+    train_loader, val_loader = load.ckplus_faces_fan(video_root, video_list, args.fold, batchsize_train, batchsize_eval)
     ''' Load model '''
     _structure = networks.resnet18_at(at_type=at_type)
     _parameterDir = './pretrain_model/Resnet18_FER+_pytorch.pth.tar'
     model = load.model_parameters(_structure, _parameterDir)
     ''' Loss & Optimizer '''
     optimizer = torch.optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), args.lr, momentum=0.9, weight_decay=1e-4)
-    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=60, gamma=0.2)
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.2)
     cudnn.benchmark = True
     ''' Train & Eval '''
     print('args.evaluate', args.evaluate)
@@ -43,6 +41,7 @@ def main():
         validate(val_loader, model)
         return
     print('args.lr', args.lr)
+
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, epoch)
         acc_epoch = val(val_loader, model, at_type)
@@ -87,10 +86,12 @@ def train(train_loader, model, optimizer, epoch):
         acc_iter = util.accuracy(pred_score.data, target_var, topk=(1,))
         losses.update(loss.item(), input_var.size(0))
         topframe.update(acc_iter[0], input_var.size(0))
+
         # compute gradient and do SGD step
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+
 
         if i % 200 == 0:
             print('Epoch: [{0}][{1}/{2}]\t'
@@ -115,8 +116,10 @@ def train(train_loader, model, optimizer, epoch):
     topVideo.update(acc_video[0], i + 1)
     print(' *Acc@Video {topVideo.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topVideo=topVideo, topframe=topframe))
 
+
 def val(val_loader, model, at_type):
     topVideo = util.AverageMeter()
+
     # switch to evaluate mode
     model.eval()
     output_store_fc = []
@@ -155,9 +158,12 @@ def val(val_loader, model, at_type):
             pred_score = model(vm=weightmean_sourcefc, phrase='eval', AT_level='pred')
         if at_type == 'self_relation-attention':
             pred_score  = model(vectors=output_store_fc, vm=weightmean_sourcefc, alphas_from1=output_alpha, index_matrix=index_matrix, phrase='eval', AT_level='second_level')
+
         acc_video = util.accuracy(pred_score.cpu(), target_vector.cpu(), topk=(1,))
         topVideo.update(acc_video[0], i + 1)
         print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideo))
+
         return topVideo.avg
+
 if __name__ == '__main__':
     main()

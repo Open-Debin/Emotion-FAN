@@ -1,4 +1,3 @@
-from __future__ import print_function
 import os
 import argparse
 import torch
@@ -29,7 +28,7 @@ def main():
     list_eval = './data/txt/afew_eval.txt'
     batchsize_eval= 64
 
-    train_loader, val_loader = load.afew_faces_baselineloader(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval)
+    train_loader, val_loader = load.afew_faces_baseline(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval)
 
     ''' Load model '''
     _structure = models.resnet18(num_classes=7)
@@ -37,9 +36,8 @@ def main():
     model = load.model_parameters(_structure, _parameterDir)
 
     ''' Loss & Optimizer '''
-    optimizer = torch.optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), args.lr,
-                                momentum=0.9,
-                                weight_decay=1e-4)
+    optimizer = torch.optim.SGD(filter(lambda p: p.requires_grad, model.parameters()), args.lr, momentum=0.9, weight_decay=1e-4)
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=60, gamma=0.2)
     cudnn.benchmark = True
 
     ''' Train & Eval '''
@@ -50,11 +48,8 @@ def main():
     print('args.lr', args.lr)
 
     for epoch in range(args.epochs):
-        util.adjust_learning_rate(optimizer, epoch, args.lr, args.epochs)
-
         train(train_loader, model, optimizer, epoch)
         acc_epoch = val(val_loader, model)
-
         is_best = acc_epoch > best_acc
         if is_best:
             print('better model!')
@@ -66,6 +61,8 @@ def main():
             }, at_type='baseline')
         else:
             print('Model too bad & not save')
+        lr_scheduler.step()
+        print("epoch: {:} learning rate:{:}".format(epoch, optimizer.param_groups[0]['lr']))
             
 def train(train_loader, model, optimizer, epoch):
     losses = util.AverageMeter()

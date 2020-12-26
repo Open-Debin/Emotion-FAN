@@ -11,23 +11,96 @@ cate2label = {'CK+':{0: 'Happy', 1: 'Angry', 2: 'Disgust', 3: 'Fear', 4: 'Sad', 
               'AFEW':{0: 'Happy',1: 'Angry',2: 'Disgust',3: 'Fear',4: 'Sad',5: 'Neutral',6: 'Surprise',
                   'Angry': 1,'Disgust': 2,'Fear': 3,'Happy': 0,'Neutral': 5,'Sad': 4,'Surprise': 6}}
 
-def ck_plus_faces():
-    pass
+def ckplus_faces_baseline(video_root, video_list, fold, batchsize_train, batchsize_eval):
+    train_dataset = data_generator.TenFold_VideoDataset(
+                                        video_root=video_root,
+                                        video_list=video_list,
+                                        rectify_label=cate2label['CK+'],
+                                        transform=transforms.Compose([transforms.Resize(224), transforms.RandomHorizontalFlip(), transforms.ToTensor()]),
+                                        fold=fold,
+                                        run_type='train'
+                                        )
 
-def afew_faces(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval):
+    val_dataset = data_generator.TenFold_VideoDataset(
+                                        video_root=video_root,
+                                        video_list=video_list,
+                                        rectify_label=cate2label['CK+'],
+                                        transform=transforms.Compose([transforms.Resize(224), transforms.ToTensor()]),
+                                        fold=fold,
+                                        run_type='test'
+                                        )
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset, batch_size=batchsize_train, shuffle=True, num_workers=8,pin_memory=True)
+    val_loader = torch.utils.data.DataLoader(
+        val_dataset, batch_size=batchsize_eval, shuffle=False, num_workers=8, pin_memory=True)
+    return train_loader, val_loader
 
-    train_dataset = data_generator.TripleImageDataset(
+def ckplus_faces_fan(video_root, video_list, fold, batchsize_train, batchsize_eval):
+    train_dataset = data_generator.TenFold_TripleImageDataset(
+                                        video_root=video_root,
+                                        video_list=video_list,
+                                        rectify_label=cate2label['CK+'],
+                                        transform=transforms.Compose([
+                                            transforms.Resize(224), transforms.RandomHorizontalFlip(), transforms.ToTensor()]),
+                                        fold=fold,
+                                        run_type='train',
+                                        )
+
+    val_dataset = data_generator.TenFold_VideoDataset(
+                                        video_root=video_root,
+                                        video_list=video_list,
+                                        rectify_label=cate2label['CK+'],
+                                        transform=transforms.Compose([transforms.Resize(224), transforms.ToTensor()]),
+                                        fold=fold,
+                                        run_type='test'
+                                        )
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset, batch_size=batchsize_train, shuffle=True, num_workers=8,pin_memory=True)
+    val_loader = torch.utils.data.DataLoader(
+        val_dataset, batch_size=batchsize_eval, shuffle=False, num_workers=8, pin_memory=True)
+    return train_loader, val_loader
+
+def afew_faces_baseline(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval):
+
+    train_dataset = data_generator.VideoDataset(
         video_root=root_train,
         video_list=list_train,
         rectify_label=cate2label['AFEW'],
-        transform=transforms.Compose([transforms.ToTensor()]),
+        transform=transforms.Compose([transforms.Resize(224), transforms.RandomHorizontalFlip(), transforms.ToTensor()]),
     )
 
     val_dataset = data_generator.VideoDataset(
         video_root=root_eval,
         video_list=list_eval,
         rectify_label=cate2label['AFEW'],
-        transform=transforms.Compose([transforms.ToTensor()]),
+        transform=transforms.Compose([transforms.Resize(224), transforms.ToTensor()]),
+        csv=False)
+
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset,
+        batch_size=batchsize_train, shuffle=True,
+        num_workers=8, pin_memory=True)
+
+    val_loader = torch.utils.data.DataLoader(
+        val_dataset,
+        batch_size=batchsize_eval, shuffle=False,
+        num_workers=8, pin_memory=True)
+    return train_loader, val_loader
+
+def afew_faces_fan(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval):
+
+    train_dataset = data_generator.TripleImageDataset(
+        video_root=root_train,
+        video_list=list_train,
+        rectify_label=cate2label['AFEW'],
+        transform=transforms.Compose([transforms.Resize(224), transforms.RandomHorizontalFlip(), transforms.ToTensor()]),
+    )
+
+    val_dataset = data_generator.VideoDataset(
+        video_root=root_eval,
+        video_list=list_eval,
+        rectify_label=cate2label['AFEW'],
+        transform=transforms.Compose([transforms.Resize(224), transforms.ToTensor()]),
         csv=False)
 
     train_loader = torch.utils.data.DataLoader(
@@ -42,6 +115,7 @@ def afew_faces(root_train, list_train, batchsize_train, root_eval, list_eval, ba
 
 
     return train_loader, val_loader
+
 
 def model_parameters(_structure, _parameterDir):
 
