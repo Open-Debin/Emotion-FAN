@@ -4,8 +4,9 @@ import time
 import argparse
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
-from code import load, util, networks
+from basic_code import load, util, networks
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 def main():
     parser = argparse.ArgumentParser(description='PyTorch Frame Attention Network Training')
@@ -18,24 +19,24 @@ def main():
     parser.add_argument('-e', '--evaluate', default=False, dest='evaluate', action='store_true',
                         help='evaluate model on validation set')
     args = parser.parse_args()
-    best_prec1 = 0
+    best_acc = 0
     at_type = ['self-attention', 'self_relation-attention'][args.at_type]
     print('The attention method is {:}, learning rate: {:}'.format(at_type, args.lr))
     
     ''' Load data '''
-    root_train = './data/train'
-    list_train = './data/list_train.txt'
+    root_train = './data/face/train_afew'
+    list_train = './data/txt/afew_train.txt'
     batchsize_train= 48
 
-    root_eval = './data/val'
-    list_eval = './data/list_eval.txt'
+    root_eval = './data/face/val_afew'
+    list_eval = './data/txt/afew_eval.txt'
     batchsize_eval= 64
 
-    train_loader, val_loader = load.afew_frames(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval)
+    train_loader, val_loader = load.afew_faces(root_train, list_train, batchsize_train, root_eval, list_eval, batchsize_eval)
 
     ''' Load model '''
     _structure = networks.resnet18_at(at_type=at_type)
-    _parameterDir = './model/Resnet18_FER+_pytorch.pth.tar'
+    _parameterDir = './pretrain_model/Resnet18_FER+_pytorch.pth.tar'
     model = load.model_parameters(_structure, _parameterDir)
 
     ''' Loss & Optimizer '''
@@ -54,17 +55,17 @@ def main():
     for epoch in range(args.epochs):
         util.adjust_learning_rate(optimizer, epoch, args.lr, args.epochs)
 
-        train(train_loader, model, optimizer, epoch)
-        prec1 = validate(val_loader, model, at_type)
+#         train(train_loader, model, optimizer, epoch)
+        acc_epoch = validate(val_loader, model, at_type)
 
-        is_best = prec1 > best_prec1
+        is_best = acc_epoch > best_acc
         if is_best:
             print('better model!')
-            best_prec1 = max(prec1, best_prec1)
+            best_acc = max(acc_epoch, best_acc)
             util.save_checkpoint({
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
-                'prec1': prec1,
+                'accuracy': acc_epoch,
             }, at_type=at_type)
         else:
             print('Model too bad & not save')
@@ -95,12 +96,12 @@ def train(train_loader, model, optimizer, epoch):
         loss = loss.sum()
         #
         output_store_fc.append(pred_score)
-        target_store.append(target)
+        target_store.append(target_var)
         index_vector.append(index)
         # measure accuracy and record loss
-        prec1 = util.accuracy(pred_score.data, target, topk=(1,))
+        acc_iter = util.accuracy(pred_score.data, target_var, topk=(1,))
         losses.update(loss.item(), input_var.size(0))
-        topframe.update(prec1[0], input_var.size(0))
+        topframe.update(acc_iter[0], input_var.size(0))
 
         # compute gradient and do SGD step
         optimizer.zero_grad()
@@ -116,7 +117,7 @@ def train(train_loader, model, optimizer, epoch):
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                  'Prec@1 {topframe.val:.3f} ({topframe.avg:.3f})\t'
+                  'Acc@1 {topframe.val:.3f} ({topframe.avg:.3f})\t'
                 .format(
                 epoch, i, len(train_loader), batch_time=batch_time,
                 data_time=data_time, loss=losses, topframe=topframe))
@@ -133,9 +134,9 @@ def train(train_loader, model, optimizer, epoch):
     target_vector = index_matrix.mm(target_store.unsqueeze(1)).squeeze(1).div(
         index_matrix.sum(1)).long()  # [380,21570] * [21570,1] -> [380,1] / sum([21570,1]) -> [380]
 
-    prec_video = util.accuracy(pred_matrix_fc.cpu(), target_vector.cpu(), topk=(1,))
-    topVideo.update(prec_video[0], i + 1)
-    print(' *Prec@Video {topVideo.avg:.3f}   *Prec@Frame {topframe.avg:.3f} '.format(topVideo=topVideo, topframe=topframe))
+    acc_video = util.accuracy(pred_matrix_fc.cpu(), target_vector.cpu(), topk=(1,))
+    topVideo.update(acc_video[0], i + 1)
+    print(' *Acc@Video {topVideo.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topVideo=topVideo, topframe=topframe))
 
 
 def validate(val_loader, model, at_type):
@@ -187,9 +188,9 @@ def validate(val_loader, model, at_type):
         if at_type == 'self_relation-attention':
             pred_score  = model(vectors=output_store_fc, vm=weightmean_sourcefc, alphas_from1=output_alpha, index_matrix=index_matrix, phrase='eval', AT_level='second_level')
 
-        prec_video = util.accuracy(pred_score.cpu(), target_vector.cpu(), topk=(1,))
-        topVideo.update(prec_video[0], i + 1)
-        print(' *Prec@Video {topVideo.avg:.3f} '.format(topVideo=topVideo))
+        acc_video = util.accuracy(pred_score.cpu(), target_vector.cpu(), topk=(1,))
+        topVideo.update(acc_video[0], i + 1)
+        print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideo))
 
         return topVideo.avg
 

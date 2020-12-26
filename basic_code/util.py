@@ -52,6 +52,6 @@ def save_checkpoint(state, at_type=''):
         os.makedirs('./model')
 
     epoch = state['epoch']
-    save_dir = './model/'+at_type+'_' + str(epoch) + '_' + str(round(float(state['prec1']), 4))
+    save_dir = './model/'+at_type+'_' + str(epoch) + '_' + str(round(float(state['accuracy']), 4))
     torch.save(state, save_dir)
     print(save_dir)
