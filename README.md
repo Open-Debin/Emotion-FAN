@@ -53,10 +53,8 @@ pip install opencv-python
 ```
 install [pytorch](https://pytorch.org/get-started/locally/)
 
-### download pretrain models
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/.
-
-### download published dataset
+### download pretrain models and published dataset
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/. put the AFEW train[ck+](http://www.jeffcohn.net/Resources/)
 
 ### face alignment
 
