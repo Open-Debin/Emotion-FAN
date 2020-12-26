@@ -32,24 +32,18 @@ Both weights can reflect the importance of frames. Comparing the blue and orange
 
 ### Dependencies
 ```
-#### create env
-conda create -n fan_emotion python=3.9
-conda activate fan_emotion
-```
-install ffmpeg
-```
+# create the environment for the project
+conda create -n emotion_fan python=3.9
+conda activate emotion_fan
+# install ffmpeg
 sudo apt-get update 
 sudo apt-get install ffmpeg
-```
-install dlib
-```
+# install dlib
 sudo apt-get update
 sudo apt-get install cmake
 sudo apt-get install libboost-python-dev
 pip3 install dlib
-```
-install cv2
-```
+# install cv2
 pip install opencv-python
 ```
 install [pytorch](https://pytorch.org/get-started/locally/)
