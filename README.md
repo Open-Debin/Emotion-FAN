@@ -31,8 +31,8 @@ We visualize the weights of attention module in the picture. The blue bars repre
 Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
 
 ### Dependencies
-creat env
 ```
+#### create env
 conda create -n fan_emotion python=3.9
 conda activate fan_emotion
 ```
@@ -52,7 +52,7 @@ install cv2
 ```
 pip install opencv-python
 ```
-install [pytorch](https://pytorch.org/get-started/locall)
+install [pytorch](https://pytorch.org/get-started/locally/)
 
 #### Download pretrain models
 We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) 
