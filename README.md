@@ -23,6 +23,13 @@ step2: [Download Pretrain Model and Dataset](#Download_Pretrain_ModelDataSet)
 
 step3: [Face Alignment](#Face Alignment)
 
+## Visualization
+We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
+
+<img width="450" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_2.jpg"/>
+
+Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
+
 ### Dependencies
 creat env
 ```
@@ -46,24 +53,8 @@ install cv2
 pip install opencv-python
 ```
 install [pytorch](https://pytorch.org/get-started/locall)
-```
-## Visualization
-We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
 
-<img width="450" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_1.jpg"/><img width="400" height="245" src="https://github.com/DebinMeng19-OpenSourceLibrary/Emotion-FAN/blob/master/visualization_2.jpg"/>
-
-Both weights can reflect the importance of frames. Comparing the blue and orange bars, the final weights of our FAN can assign higher weights to the more obvious face frames, while self-attention module could assign high weights on some obscure face frames. This explains why adding relation-attention boost performance.
-
-## Requirement
-Pillow == 6.2.0
-
-numpy == 1.17.2
-
-torch == 1.3.0
-
-torchvision == 0.4.1
-
-## Download pretrain models
+#### Download pretrain models
 We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) 
 
 Notice!!! The model trained on the AFEW dataset or CK+ dataset are not published.
