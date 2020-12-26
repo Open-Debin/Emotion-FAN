@@ -24,22 +24,28 @@ step2: [Download Pretrain Model and Dataset](#Download_Pretrain_ModelDataSet)
 step3: [Face Alignment](#Face Alignment)
 
 ### Dependencies
+creat env
 ```
-# creat env
 conda create -n fan_emotion python=3.9
 conda activate fan_emotion
-# install ffmpeg
+```
+install ffmpeg
+```
 sudo apt-get update 
 sudo apt-get install ffmpeg
-# install dlib
+```
+install dlib
+```
 sudo apt-get update
 sudo apt-get install cmake
 sudo apt-get install libboost-python-dev
 pip3 install dlib
-# install cv2
+```
+install cv2
+```
 pip install opencv-python
-# install pytorch
-please reference this link https://pytorch.org/get-started/locall
+```
+install [pytorch](https://pytorch.org/get-started/locall)
 ```
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
