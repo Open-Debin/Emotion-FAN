@@ -16,7 +16,10 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
   url={https://github.com/Open-Debin/Emotion-FAN}
 }
 ```
-
+## User instructions
+step1: [Install Dependencies](## Dependencies)
+step1: [Download Pretrain Model and Dataset](# Download Pretrain Model and DataSet)
+step1: [Face Alignment](# Face Alignment)
 
 ## Visualization
 We visualize the weights of attention module in the picture. The blue bars represent the ***self-attention weights*** and orange bars the ***final weights*** (the weights combine ***self-attention*** and ***relation-attention*** ).
