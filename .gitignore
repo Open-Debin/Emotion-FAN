@@ -1,0 +1,10 @@
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.ipynb_checkpoints
+*.idea
+*__pycache__*
+*.pyc
+*.cfg
+!.gitignore
