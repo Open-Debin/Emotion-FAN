@@ -72,7 +72,7 @@ python frame2face_ck_plus.py
 #### CK+ Dataset
 ```
 # Baseline
-CUDA_VISIBLE_DEVICES=0 python baseline_ck_plus.py -f 10
+CUDA_VISIBLE_DEVICES=0 python baseline_ck_plus.py --fold 10 # Notice you should test on fold 1,2, ..., 10. And finally average performance of the ten folds.
 ## Training with self-attention
 CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 0
 ## Training with relation-attention
