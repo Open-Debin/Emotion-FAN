@@ -73,7 +73,7 @@ cd ./data/face_alignment_code/
 python frame2face_ck_plus.py
 ```
 
-### running experiments <br>
+### running experiments
 #### AFEW Dataset <br>
 ```
 # Baseline
