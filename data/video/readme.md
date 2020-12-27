@@ -15,8 +15,8 @@ The directory structure should look like below:
 │   ├── Sad <br>
 │   ├── Surprise <br>
 │   └── Train_6.xml <br>
-│   
-└── val_afew
+│ <br>
+└── val_afew <br>
     ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
     ├── Angry <br>
     ├── Disgust <br>
