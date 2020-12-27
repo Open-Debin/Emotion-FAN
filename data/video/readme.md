@@ -17,14 +17,14 @@ The directory structure should look like below:
 │   └── Train_6.xml <br>
 │ <br>
 └── val_afew <br>
-     ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
+     ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
      ├── Angry <br>
-    ├── Disgust <br>
-    ├── Fear <br>
-    ├── Happy <br>
-    ├── Neutral <br>
-    ├── Sad <br>
-    ├── Surprise <br>
-    └── Val_6.xml <br>
+     ├── Disgust <br>
+     ├── Fear <br>
+     ├── Happy <br>
+     ├── Neutral <br>
+     ├── Sad <br>
+     ├── Surprise <br>
+     └── Val_6.xml <br>
 
 16 directories, 7 files
