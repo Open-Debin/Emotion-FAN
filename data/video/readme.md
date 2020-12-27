@@ -18,7 +18,7 @@ The directory structure should look like below:
 │ <br>
 └── val_afew <br>
     ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
-    ├── Angry <br>
+    ├── Angry <br>
     ├── Disgust <br>
     ├── Fear <br>
     ├── Happy <br>
