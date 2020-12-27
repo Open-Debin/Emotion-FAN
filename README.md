@@ -21,7 +21,7 @@ This is the latest version. You can find the old version in branch [version1.0_a
 
 step1: [Install Dependencies](#dependencies)
 
-step2: [Download Pretrain Model and Dataset](#download-pretrain-models)
+step2: [Download Pretrain Model and Dataset](#download-pretrain-models-and-published-dataset)
 
 step3: [Face Alignment](#face-alignment)
 
