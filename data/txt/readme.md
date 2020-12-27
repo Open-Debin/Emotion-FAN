@@ -1,4 +1,4 @@
-The directory structure of this file should look like below:
+The files' directories under this path should look like below:
 
 ./Emotion-FAN/data/txt <br>
 ├── afew_eval.txt <br>
