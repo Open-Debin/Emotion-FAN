@@ -62,11 +62,14 @@ You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.
 
 ### face alignment
 #### AFEW Dataset
-#### CK+ Dataset
 ```
 cd ./data/face_alignment_code/
 python video2frame_afew.py
 python frame2face_afew.py
+```
+#### CK+ Dataset
+```
+cd ./data/face_alignment_code/
 python frame2face_ck_plus.py
 ```
 
