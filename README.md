@@ -17,7 +17,7 @@ If you are using pieces of the posted code, please cite the above paper. thanks.
 }
 ```
 ## User instructions
-This is the latest version. You can find the old version in branch [version1.0_august_2019](https://github.com/Open-Debin/Emotion-FAN/blob/version1.0_august_2019/README.md) or tag [v1.0_august_2019](https://github.com/Open-Debin/Emotion-FAN/releases/tag/v1.0_august_2019).
+This is the latest version. You can find the old version in branch [version1.0_august_2019](https://github.com/Open-Debin/Emotion-FAN/tree/version1.0_august_2019) or tag [v1.0_august_2019](https://github.com/Open-Debin/Emotion-FAN/releases/tag/v1.0_august_2019).
 
 step1: [Install Dependencies](#dependencies)
 
