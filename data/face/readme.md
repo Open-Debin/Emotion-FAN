@@ -1,4 +1,4 @@
-The file ***"train_afew"***, ***"val_afew"***, and ***"cohn-kanade-images"*** are generated from the [face_alignment](https://github.com/Open-Debin/Emotion-FAN/blob/dev/README.md#afew-dataset) process.
+The file ***"train_afew"***, ***"val_afew"***, and ***"ck_face"*** are generated from the [face_alignment](https://github.com/Open-Debin/Emotion-FAN/blob/dev/README.md#afew-dataset) process.
 
 The files' directories under this path should look like below:
 
