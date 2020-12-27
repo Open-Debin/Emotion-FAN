@@ -3,8 +3,11 @@ We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and an
 The directory structure should look like below:
 
 ./Emotion-FAN/pretrain_model
+
 ├── Resnet18_FER+_pytorch.pth.tar
+
 ├── Resnet18_MS1M_pytorch.pth.tar
+
 └── readme.md
 
 0 directories, 3 files
