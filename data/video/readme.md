@@ -3,7 +3,7 @@ Please unzip the train (val) part of AFEW dataset at the file ./Emotion-FAN/data
 
 The directory structure should look like below:
 
-./Emotion-FAN/data/video
+./Emotion-FAN/data/video <br>
 ├── readme.md <br>
 ├── train_afew <br>
 │   ├── AlignedFaces_LBPTOP_Points.zip <br>
@@ -17,8 +17,8 @@ The directory structure should look like below:
 │   └── Train_6.xml <br>
 │ <br>
 └── val_afew <br>
-    ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
-    ├── Angry <br>
+     ├── AlignedFaces_LBPTOP_Points_Val.zip <br>
+     ├── Angry <br>
     ├── Disgust <br>
     ├── Fear <br>
     ├── Happy <br>
