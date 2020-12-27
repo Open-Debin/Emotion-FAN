@@ -1,7 +1,7 @@
 You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com <br>
-Please unzip the train (val) part of AFEW dataset at the file ./Emotion-FAN/data/video/train_afew (val_afew)
+Please unzip the train (val) part of AFEW dataset at the directory: ***"./Emotion-FAN/data/video/train_afew (val_afew)"***.
 
-The directory structure should look like below:
+The files' directories under this path should look like below:
 
 ./Emotion-FAN/data/video <br>
 ├── readme.md <br>
