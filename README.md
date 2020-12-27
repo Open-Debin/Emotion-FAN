@@ -56,9 +56,9 @@ pip install opencv-python
 install [pytorch](https://pytorch.org/get-started/locally/)
 
 ### download pretrain models and published dataset
-We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the file: {project_dir}/pretrain_model/. 
+We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and another one in **FER+**. [Baidu](https://pan.baidu.com/s/1OgxPSSzUhaC9mPltIpp2pg) or [OneDrive](https://1drv.ms/u/s!AhGc2vUv7IQtl1Pt7FhPXr_Kofd5?e=3MvPFX) . Please put the model at the directory: ***"Emotion-FAN/pretrain_model/"***. 
 
-You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+ dataset](http://www.jeffcohn.net/Resources/). Please unzip the train (val) part of AFEW dataset at the file ./Emotion-FAN/data/video/train_afew (val_afew), put the file cohn-kanade-images of the [ck+ dataset](http://www.jeffcohn.net/Resources/) at the file: {project_dir}/data/frame .
+You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+ dataset](http://www.jeffcohn.net/Resources/). Please unzip the ***train (val)*** part of AFEW dataset at the directory: ***"./Emotion-FAN/data/video/train_afew (val_afew)"***, put the file ***"cohn-kanade-images"*** of the [ck+ dataset](http://www.jeffcohn.net/Resources/) at the directory: ***"./Emotion-FAN/data/frame/"*** .
 
 ### face alignment
 #### AFEW Dataset
