@@ -61,6 +61,8 @@ We share two **ResNet18** models, one model pretrained in **MS-Celeb-1M** and an
 You can get the AFEW dataset by ask the official organizer: shreya.ghosh@iitrpr.ac.in and emotiw2014@gmail.com . Also, you can get the [ck+ dataset](http://www.jeffcohn.net/Resources/). Please unzip the train (val) part of AFEW dataset at the file ./Emotion-FAN/data/video/train_afew (val_afew), put the file cohn-kanade-images of the [ck+ dataset](http://www.jeffcohn.net/Resources/) at the file: {project_dir}/data/frame .
 
 ### face alignment
+#### AFEW Dataset
+#### CK+ Dataset
 ```
 cd ./data/face_alignment_code/
 python video2frame_afew.py
@@ -68,17 +70,8 @@ python frame2face_afew.py
 python frame2face_ck_plus.py
 ```
 
-### running experiments
-#### CK+ Dataset
-```
-# Baseline. Notice you should test on fold 1,2, ..., 10. And finally average performance of the ten folds.
-CUDA_VISIBLE_DEVICES=0 python baseline_ck_plus.py --fold 10
-# Training with self-attention
-CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 0
-# Training with relation-attention
-CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 1
-```
-#### AFEW Dataset
+### running experiments <br>
+#### AFEW Dataset <br>
 ```
 # Baseline
 CUDA_VISIBLE_DEVICES=0 python baseline_afew.py
@@ -86,6 +79,15 @@ CUDA_VISIBLE_DEVICES=0 python baseline_afew.py
 CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 0
 # Training with relation-attention
 CUDA_VISIBLE_DEVICES=0 python fan_afew_traintest.py --at_type 1
+```
+#### CK+ Dataset <br>
+```
+# Baseline. Notice you should test on fold 1,2, ..., 10. And finally average performance of the ten folds.
+CUDA_VISIBLE_DEVICES=0 python baseline_ck_plus.py --fold 10
+# Training with self-attention
+CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 0
+# Training with relation-attention
+CUDA_VISIBLE_DEVICES=0 python fan_ckplus_traintest.py --at_type 1
 ```
 #### Options
 * ``` --lr ```: initial learning rate
