@@ -4,13 +4,13 @@ the file ***"train_afew"*** and ***"val_afew"*** are generated from the [face_al
 The files' directories under this path should look like below:
 
 ./Emotion-FAN/data/frame <br>
+├── readme.md <br>
 ├── cohn-kanade-images <br>
 │   ├── S005 <br>
 │   ├── '...' <br>
 │   ├── '...' <br> 
 │   ├── S895 <br>
 │   └── S999 <br>
-├── readme.md <br>
 ├── train_afew <br>
 │   ├── Angry <br>
 │   ├── Disgust <br>
