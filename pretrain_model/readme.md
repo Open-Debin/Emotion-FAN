@@ -4,8 +4,7 @@ The directory structure should look like below:
 
 ./Emotion-FAN/pretrain_model  
 ├── Resnet18_FER+_pytorch.pth.tar  
-├── Resnet18_MS1M_pytorch.pth.tar
-
+├── Resnet18_MS1M_pytorch.pth.tar<br>
 └── readme.md
 
 0 directories, 3 files
