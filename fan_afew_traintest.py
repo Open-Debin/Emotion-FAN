@@ -19,7 +19,8 @@ def main():
     args = parser.parse_args()
     best_acc = 0
     at_type = ['self-attention', 'self_relation-attention'][args.at_type]
-    print('The attention method is {:}, learning rate: {:}'.format(at_type, args.lr))
+    logger = util.Logger('./log/','fan_afew')
+    logger.print('The attention method is {:}, learning rate: {:}'.format(at_type, args.lr))
     
     ''' Load data '''
     root_train = './data/face/train_afew'
@@ -38,27 +39,27 @@ def main():
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=60, gamma=0.2)
     cudnn.benchmark = True
     ''' Train & Eval '''
-    print('args.evaluate', args.evaluate)
     if args.evaluate == True:
+        logger.print('args.evaluate: {:}', args.evaluate)        
         validate(val_loader, model)
         return
-    print('args.lr', args.lr)
+    logger.print('frame attention network (fan) afew dataset, learning rate: {:}'.format(args.lr))
+    
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, epoch)
         acc_epoch = val(val_loader, model, at_type)
         is_best = acc_epoch > best_acc
         if is_best:
-            print('better model!')
+            logger.print('better model!')
             best_acc = max(acc_epoch, best_acc)
             util.save_checkpoint({
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
                 'accuracy': acc_epoch,
             }, at_type=at_type)
-        else:
-            print('Model too bad & not save')
+            
         lr_scheduler.step()
-        print("epoch: {:} learning rate:{:}".format(epoch, optimizer.param_groups[0]['lr']))
+        logger.print("epoch: {:} learning rate:{:}".format(epoch+1, optimizer.param_groups[0]['lr']))
         
 def train(train_loader, model, optimizer, epoch):
     losses = util.AverageMeter()
@@ -93,7 +94,7 @@ def train(train_loader, model, optimizer, epoch):
         optimizer.step()
 
         if i % 200 == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
+            logger.print('Epoch: [{:3d}][{:3d}/{:3d}]\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   'Acc@1 {topframe.val:.3f} ({topframe.avg:.3f})\t'
                 .format(
@@ -113,7 +114,7 @@ def train(train_loader, model, optimizer, epoch):
 
     acc_video = util.accuracy(pred_matrix_fc.cpu(), target_vector.cpu(), topk=(1,))
     topVideo.update(acc_video[0], i + 1)
-    print(' *Acc@Video {topVideo.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topVideo=topVideo, topframe=topframe))
+    logger.print(' *Acc@Video {topVideo.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topVideo=topVideo, topframe=topframe))
 
 def val(val_loader, model, at_type):
     topVideo = util.AverageMeter()
@@ -157,7 +158,7 @@ def val(val_loader, model, at_type):
             pred_score  = model(vectors=output_store_fc, vm=weightmean_sourcefc, alphas_from1=output_alpha, index_matrix=index_matrix, phrase='eval', AT_level='second_level')
         acc_video = util.accuracy(pred_score.cpu(), target_vector.cpu(), topk=(1,))
         topVideo.update(acc_video[0], i + 1)
-        print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideo))
+        logger.print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideo))
         return topVideo.avg
 if __name__ == '__main__':
     main()

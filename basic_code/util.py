@@ -1,5 +1,7 @@
 import os
+import time
 import torch
+from pathlib import Path
 
 def accuracy(output, target, topk=(1,)):
     """Computes the precision@k for the specified values of k"""
@@ -43,3 +45,34 @@ def save_checkpoint(state, at_type=''):
     save_dir = './model/'+at_type+'_' + str(epoch) + '_' + str(round(float(state['accuracy']), 4))
     torch.save(state, save_dir)
     print(save_dir)
+    
+def time_now():
+  ISOTIMEFORMAT='%d-%h-%Y-%H-%M-%S'
+  string = '{:}'.format(time.strftime( ISOTIMEFORMAT, time.gmtime(time.time()) ))
+  return string
+
+class Logger(object):
+    def __init__(self, log_dir, title, args=False):
+        """Create a summary writer logging to log_dir."""
+        self.log_dir = Path("{:}".format(str(log_dir)))
+        if not self.log_dir.exists(): os.makedirs(str(self.log_dir))
+        self.title = title
+        self.log_file = '{:}/{:}_date_{:}.txt'.format(self.log_dir,title, time_now())
+        self.file_writer = open(self.log_file, 'a')
+        
+        if args:
+            for key, value in vars(args).items():
+                self.print('  [{:18s}] : {:}'.format(key, value))
+        self.print('{:} --- args ---'.format(time_now()))
+        
+    def print(self, string, fprint=True, is_pp=False):
+        if is_pp: pp.pprint (string)
+        else:     print(string)
+        if fprint:
+          self.file_writer.write('{:}\n'.format(string))
+          self.file_writer.flush()
+            
+    def write(self, string):
+        self.file_writer.write('{:}\n'.format(string))
+        self.file_writer.flush()  
+        

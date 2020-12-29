@@ -18,9 +18,8 @@ def main():
     parser.add_argument('-e', '--evaluate', default=False, dest='evaluate', action='store_true',
                         help='evaluate model on validation set')
     args = parser.parse_args()
-#     pdb.set_trace()
     best_acc = 0
-    print('baseline afew dataset, learning rate: {:}'.format(args.lr))
+    logger = util.Logger('./log/','baseline_ckplus')
     
     ''' Load data '''
     video_root = './data/face/ck_face'
@@ -37,27 +36,26 @@ def main():
     lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.2)
     cudnn.benchmark = True
     ''' Train & Eval '''
-    print('args.evaluate', args.evaluate)
     if args.evaluate == True:
+        logger.print('args.evaluate: {:}', args.evaluate)
         validate(val_loader, model)
         return
-    print('args.lr', args.lr)
+    logger.print('baseline ck+ dataset, learning rate: {:}'.format(args.lr))
     for epoch in range(args.epochs):
         train(train_loader, model, optimizer, epoch)
         acc_epoch = val(val_loader, model)
         is_best = acc_epoch > best_acc
         if is_best:
-            print('better model!')
+            logger.print('better model!')
             best_acc = max(acc_epoch, best_acc)
             util.save_checkpoint({
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
                 'accuracy': acc_epoch,
             }, at_type='baseline')
-        else:
-            print('Model too bad & not save')
+            
         lr_scheduler.step()
-        print("epoch: {:} learning rate:{:}".format(epoch, optimizer.param_groups[0]['lr']))
+        logger.print("epoch: {:} learning rate:{:}".format(epoch+1, optimizer.param_groups[0]['lr']))
             
 def train(train_loader, model, optimizer, epoch):
     losses = util.AverageMeter()
@@ -90,7 +88,7 @@ def train(train_loader, model, optimizer, epoch):
         optimizer.step()
         
         if i % 200 == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
+            logger.print('Epoch: [{:3d}][{:3d}/{:3d}]\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   'Acc_Iter@1 {topframe.val:.3f} ({topframe.avg:.3f})\t'
                 .format(
@@ -109,7 +107,7 @@ def train(train_loader, model, optimizer, epoch):
         index_matrix.sum(1)).long()  # [380,21570] * [21570,1] -> [380,1] / sum([21570,1]) -> [380]
     prec_video_soft = util.accuracy(output_store_soft, target_vector, topk=(1,))
     topVideoSoft.update(prec_video_soft[0].item(), i + 1)
-    print(' *Acc@Video_soft {topsoft.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topsoft=topVideoSoft, topframe=topframe))
+    logger.print(' *Acc@Video_soft {topsoft.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topsoft=topVideoSoft, topframe=topframe))
 
 def val(train_loader, model):
     topframe = util.AverageMeter()
@@ -149,7 +147,7 @@ def val(train_loader, model):
             index_matrix.sum(1)).long()  # [380,21570] * [21570,1] -> [380,1] / sum([21570,1]) -> [380]
         prec_video_soft = util.accuracy(output_store_soft, target_vector, topk=(1,))
         topVideoSoft.update(prec_video_soft[0].item(), i + 1)
-        print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideoSoft))
+        logger.print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideoSoft))
 
     return topVideoSoft.avg
 

@@ -17,13 +17,12 @@ def main():
                         help='evaluate model on validation set')
     args = parser.parse_args()
     best_acc = 0
-    print('baseline afew dataset, learning rate: {:}'.format(args.lr))
+    logger = util.Logger('./log/','baseline_afew')
     
     ''' Load data '''
     root_train = './data/face/train_afew'
     list_train = './data/txt/afew_train.txt'
     batchsize_train= 48
-
     root_eval = './data/face/val_afew'
     list_eval = './data/txt/afew_eval.txt'
     batchsize_eval= 64
@@ -41,30 +40,29 @@ def main():
     cudnn.benchmark = True
 
     ''' Train & Eval '''
-    print('args.evaluate', args.evaluate)
     if args.evaluate == True:
+        logger.print('args.evaluate: {:}', args.evaluate)
         validate(val_loader, model)
         return
-    print('args.lr', args.lr)
+    logger.print('baseline afew dataset, learning rate: {:}'.format(args.lr))
 
     for epoch in range(args.epochs):
-        train(train_loader, model, optimizer, epoch)
-        acc_epoch = val(val_loader, model)
+        train(train_loader, model, optimizer, epoch, logger)
+        acc_epoch = val(val_loader, model, logger)
         is_best = acc_epoch > best_acc
         if is_best:
-            print('better model!')
+            logger.print('better model!')
             best_acc = max(acc_epoch, best_acc)
             util.save_checkpoint({
                 'epoch': epoch + 1,
                 'state_dict': model.state_dict(),
                 'accuracy': acc_epoch,
             }, at_type='baseline')
-        else:
-            print('Model too bad & not save')
-        lr_scheduler.step()
-        print("epoch: {:} learning rate:{:}".format(epoch, optimizer.param_groups[0]['lr']))
             
-def train(train_loader, model, optimizer, epoch):
+        lr_scheduler.step()
+        logger.print("epoch: {:} learning rate:{:}".format(epoch+1, optimizer.param_groups[0]['lr']))
+            
+def train(train_loader, model, optimizer, epoch, logger):
     losses = util.AverageMeter()
     topframe = util.AverageMeter()
     topVideoSoft = util.AverageMeter()
@@ -100,7 +98,7 @@ def train(train_loader, model, optimizer, epoch):
         optimizer.step()
 
         if i % 200 == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
+            logger.print('Epoch: [{:3d}][{:3d}/{:3d}]\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   'Acc_Iter@1 {topframe.val:.3f} ({topframe.avg:.3f})\t'
                 .format(
@@ -119,9 +117,9 @@ def train(train_loader, model, optimizer, epoch):
         index_matrix.sum(1)).long()  # [380,21570] * [21570,1] -> [380,1] / sum([21570,1]) -> [380]
     prec_video_soft = util.accuracy(output_store_soft, target_vector, topk=(1,))
     topVideoSoft.update(prec_video_soft[0].item(), i + 1)
-    print(' *Acc@Video_soft {topsoft.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topsoft=topVideoSoft, topframe=topframe))
+    logger.print(' *Acc@Video_soft {topsoft.avg:.3f}   *Acc@Frame {topframe.avg:.3f} '.format(topsoft=topVideoSoft, topframe=topframe))
 
-def val(train_loader, model):
+def val(train_loader, model, logger):
     topframe = util.AverageMeter()
     topVideoSoft = util.AverageMeter()
 
@@ -161,7 +159,7 @@ def val(train_loader, model):
             index_matrix.sum(1)).long()  # [380,21570] * [21570,1] -> [380,1] / sum([21570,1]) -> [380]
         prec_video_soft = util.accuracy(output_store_soft, target_vector, topk=(1,))
         topVideoSoft.update(prec_video_soft[0].item(), i + 1)
-        print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideoSoft))
+        logger.print(' *Acc@Video {topVideo.avg:.3f} '.format(topVideo=topVideoSoft))
 
     return topVideoSoft.avg
 
