@@ -42,7 +42,7 @@ def main():
     ''' Train & Eval '''
     if args.evaluate == True:
         logger.print('args.evaluate: {:}', args.evaluate)
-        validate(val_loader, model)
+        val(val_loader, model)
         return
     logger.print('baseline afew dataset, learning rate: {:}'.format(args.lr))
 
