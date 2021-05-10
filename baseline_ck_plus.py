@@ -38,7 +38,7 @@ def main():
     ''' Train & Eval '''
     if args.evaluate == True:
         logger.print('args.evaluate: {:}', args.evaluate)
-        validate(val_loader, model)
+        val(val_loader, model)
         return
     logger.print('baseline ck+ dataset, learning rate: {:}'.format(args.lr))
     for epoch in range(args.epochs):
